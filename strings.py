@@ -1,0 +1,10 @@
+s1 = "You  "
+s2 = "This word has already been used,"
+s3 = 'YOU LOSE'
+s4 = "Game Finished"
+s5 = "Your score :"
+s6 = "\t Computer score : "
+s7 = "No available word found, YOU WIN !!!"
+s8 = "Computer : "
+s9 = "Last Letter and Your First letter mismatch "
+s10 = " Points"

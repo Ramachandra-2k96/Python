@@ -1,12 +1,24 @@
+#Rule 4 is import here
 import mod_rule4 as mr4
-alpha = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+# all the strings are included here
+import strings as S  
+
+
+#all the variables required                                                
+alpha =[]
 word_done = []
 man_sum = 0
 Computer_sum = 0 
+last_word = ""
+timeout = 30
 
 
-    
-def transform1(file):
+# creating list fo alphabets here
+for i in range(97,97+26,1):                      
+    alpha.append(chr(i))   
+
+# with file name opening a file and making the nested list of words based on the first letter
+def transform1(file):                           
         f1 = open(file,'r')
         list1 = f1.read().split('\n')
         list2 = []
@@ -19,7 +31,7 @@ def transform1(file):
         return list2
 
 
-
+#updating the list and choosing best word for computer
 def transform2(word, list1):
     lastchar = word[-1]
     pos = alpha.index(lastchar)
@@ -28,48 +40,47 @@ def transform2(word, list1):
         if word1 in templist:
             templist.remove(word1)
     if templist:
-        return templist[0]  
+        max_size_word = templist[0]
+        for new_word in templist:
+             if len(new_word) > len(max_size_word) and len(new_word) >len(word):
+                 max_size_word = new_word
+        return max_size_word 
     else:
         return None
 
 
-last_word = ""
-timeout = 10
-s1 = "You  "
-list1 = transform1('C:/Users/ramac/Downloads/words.txt')
+
+list1 = transform1('words.txt')
 for i in range(100):
-    dif,input1 = mr4.rule4(s1,timeout) #Rule 4 satisfied
+    dif,input1 = mr4.rule4(S.s1,timeout)                 #Rule 4 satisfied
     if dif >timeout:
-        print('You took',dif-timeout,' seconds extra')
-        print('YOU LOOSE')
+        print('You took', dif-timeout, ' seconds extra')
+        print(S.s3)
         break
-    if input1 in word_done: # Rule 3 satisfied
-        print("This word has already been used,")
-        print("Game Finished")
-        print('YOU LOOSE')
-        print(" Your score :",man_sum,"\t Computer score : ",Computer_sum)
+    if input1 in word_done:                              # Rule 3 satisfied
+        print(S.s2, "\n", S.s4, "\n", S.s3)
+        print(S.s5, man_sum, S.s6, Computer_sum)
         break
-    if last_word =="" or last_word[-1] == input1[0]: #Rule 2 satisfied
+    if last_word == "" or last_word[-1] == input1[0]:     #Rule 2 satisfied
         word_done.append(input1)
-        man_sum+=len(input1)
+        man_sum += len(input1)
         last_word = transform2(input1, list1)
         if last_word is None:
-            print("No available word found, YOU WIN !!!")
-            print(" Your score :",man_sum,"\t Computer score : ",Computer_sum)
+            print(S.s7)
+            print(S.s5, man_sum, S.s6, Computer_sum)
             break
         else:
             word_done.append(last_word)
             Computer_sum += len(last_word)
-            print("Computer : "+last_word+"\n")
-            print(" Your score :",man_sum,"\t Computer score : ",Computer_sum)
+            print(S.s8 + last_word + "\n")
+            print(S.s5, man_sum, S.s6, Computer_sum, "\n")
     else:
-        print("Last Letter and Your First letter mismatch ")
-        print("You LOOSE ")
-        print(" Your score :",man_sum,"\t Computer score : ",Computer_sum)
+        print(S.s9, "\n", S.s3)
+        print(S.s5, man_sum, S.s6, Computer_sum)
         break 
 
 if man_sum <= Computer_sum:
-    print("You Lost with ",Computer_sum-man_sum," Points")
+    print("You Lost with ", Computer_sum-man_sum, S.s10)
 else:
-    print("YOU WIN !!! with ",man_sum-Computer_sum," Points")
+    print("YOU WIN !!! with ", man_sum-Computer_sum, S.s10)
 
