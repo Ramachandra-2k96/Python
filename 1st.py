@@ -42,12 +42,13 @@ def transform2(word, list1):
     if templist:
         max_size_word = templist[0]
         for new_word in templist:
-             if len(new_word) > len(max_size_word) and len(new_word) >len(word):
+             if len(new_word) > len(max_size_word) and len(new_word) >len(word):  #this is for best case
+                 max_size_word = new_word
+             elif len(new_word) > len(max_size_word): # if we did not find the word which is greater than the user word then we can select the words which has largest in list
                  max_size_word = new_word
         return max_size_word 
     else:
         return None
-
 
 
 list1 = transform1('words.txt')
