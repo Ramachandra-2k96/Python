@@ -17,55 +17,48 @@ def file_handel(file_path):
             age.append(40)
     return (name,age,gender,survived)
 
+def survivers(name,age,gender,survived):
+    children, male, female =[],[],[]
+    for n, a, g, s in zip(name, age, gender, survived): 
+        if s and a<10 :
+            temp =[s, n, g, a]
+            children.append(temp)
+        if s and a>=10 and g =='male':
+            temp =[s, g, n, a]
+            male.append(temp) 
+        if s and a>=10 and g =='female':
+            temp =[s, g, n, a]
+            female.append(temp)
+    return (children,male,female)
+
+def Non_survivers(name,age,gender,survived):
+    children, male, female =[],[],[]
+    for n, a, g, s in zip(name, age, gender, survived): 
+        if (not s) and a<10 :
+            temp =[s, n, g, a]
+            children.append(temp)
+        if (not s) and a>=10 and g =='male':
+            temp =[s, g, n, a]
+            male.append(temp) 
+        if (not s) and a>=10 and g =='female':
+            temp =[s, g, n, a]
+            female.append(temp) 
+    return [children,male,female]
 
 
-scount,lcount = 0,0
 name,age,gender,survived = file_handel('titanic.csv')
-for s in survived:
-    if s:
-        scount += 1
-    else:
-        lcount += 1
-   
-        
-print("The survivers ",scount, " and  they are :")
 temp = []
-children = []
-male =[]
-female = []
-for n, a, g, s in zip(name, age, gender, survived): 
-    if s and a<10 :
-        temp =[s, n, g, a]
-        children.append(temp)
-    if s and a>=10 and g =='male':
-        temp =[s, g, n, a]
-        male.append(temp) 
-    if s and a>=10 and g =='female':
-        temp =[s, g, n, a]
-        female.append(temp) 
-        
-print("children : ",len(children),"\n")        
-print("Male : ",len(male),"\n")        
-print("Female : ",len(female),"\n")        
+children, male, female = survivers(name,age,gender,survived)
+print("The total survivers = ",len(children)+len(male)+len(female), " and  they are :")
+print("children : ",len(children))        
+print("Male : ",len(male))        
+print("Female : ",len(female))        
 
-children = []
-male =[]
-female = []
-print("The Non-survivers ",lcount, " and  they are :")
-for n, a, g, s in zip(name, age, gender, survived): 
-    if (not s) and a<10 :
-        temp =[s, n, g, a]
-        children.append(temp)
-    if (not s) and a>=10 and g =='male':
-        temp =[s, g, n, a]
-        male.append(temp) 
-    if (not s) and a>=10 and g =='female':
-        temp =[s, g, n, a]
-        female.append(temp) 
-        
-print("children : ",len(children),"\n")        
-print("Male : ",len(male),"\n")        
-print("Female : ",len(female),"\n")        
+children, male, female = Non_survivers(name,age,gender,survived)
+print("\nThe total Non-survivers = ",len(children)+len(male)+len(female), " and  they are :")
+print("children : ",len(children))        
+print("Male : ",len(male))        
+print("Female : ",len(female))        
 
 
 
