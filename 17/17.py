@@ -10,7 +10,7 @@ def give_holidays():
         if "KA" in l[3]:
             if "except" not in l[3]:
                 holiday.append(str(l[0]+" "+l[1]+", Occasion : "+l[2]+"\n")) # It wil print if the KA is present in column and the word except is not present
-        elif "National" in l[3]:
+        elif "National" in l[3] and "except" not in l[3]:
             holiday.append(str(l[0]+" "+l[1]+", Occasion : "+l[2]+"\n"))# print if its a national holiday
     return holiday
 
